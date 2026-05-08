@@ -106,3 +106,72 @@ window.onload = function() {
   for (let i = 0; i < 3; i++) addAlert();
 };
 </script>
+
+// Interactive Incident System
+const incidentsData = [
+  {
+    title: "NEVADA DESERT - SECTOR 7",
+    status: "ONGOING",
+    threat: "Level III Cryptid Activity",
+    update: "47 minutes ago",
+    details: "Multiple sightings of a large bipedal entity approximately 3 meters tall. Containment Team Cerberus-4 engaged. 3 civilian witnesses processed under Memory Suppression Protocol."
+  },
+  {
+    title: "OREGON FOREST - SECTOR 12",
+    status: "HIGH ACTIVITY",
+    threat: "Missing Persons Spike (17 cases)",
+    update: "2 hours ago",
+    details: "Confirmed Howler (Entity-019) activity. Audio mimicry recorded. Teams advised to use high-frequency disruptors."
+  },
+  {
+    title: "BLACK SITE ECHO - ALASKA",
+    status: "COMMUNICATION LOST",
+    threat: "Possible Containment Failure",
+    update: "11 hours ago",
+    details: "All contact lost with research staff. Last transmission mentioned 'They are learning our voices.' Rescue team dispatched."
+  }
+];
+
+function loadIncidents() {
+  const container = document.getElementById('incident-cards');
+  if (!container) return;
+
+  container.innerHTML = '';
+
+  incidentsData.forEach(inc => {
+    const card = document.createElement('div');
+    card.className = 'card red';
+    card.innerHTML = `
+      <h3>${inc.title}</h3>
+      <p><strong>Status:</strong> <span class="red">${inc.status}</span></p>
+      <p><strong>Threat:</strong> ${inc.threat}</p>
+      <p><strong>Last Update:</strong> ${inc.update}</p>
+      <button onclick="showIncident('${inc.title}', '${inc.details}')">VIEW FULL REPORT</button>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function showIncident(title, details) {
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-body').innerHTML = `
+    <p>${details}</p>
+    <br>
+    <p style="color:#ffcc00;"><strong>CLASSIFICATION: RESTRICTED • EYES ONLY</strong></p>
+  `;
+  document.getElementById('incident-modal').classList.remove('hidden');
+}
+
+function closeIncidentModal() {
+  document.getElementById('incident-modal').classList.add('hidden');
+}
+
+// Make sure this runs on incidents page
+if (document.getElementById('incident-cards')) {
+  window.onload = function() {
+    updateClock();
+    setInterval(addAlert, 4500);
+    for (let i = 0; i < 3; i++) addAlert();
+    loadIncidents();
+  };
+}
