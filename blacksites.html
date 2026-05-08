@@ -1,1 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLACK SITES - C.I.A.</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .site-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Security Bar -->
+  <div class="security-bar">
+    <span>CRYPTIC INTELLIGENCE AGENCY • BLACK SITE REGISTRY</span>
+    <span id="live-time"></span>
+  </div>
 
+  <div class="container">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="logo">
+        <h1>C.I.A.</h1>
+        <p>CRYPTIC INTELLIGENCE AGENCY</p>
+      </div>
+      <ul>
+        <li onclick="window.location.href='index.html'">← HOME</li>
+        <li onclick="window.location.href='database.html'">DATABASE</li>
+        <li onclick="window.location.href='incidents.html'">INCIDENTS</li>
+        <li onclick="window.location.href='blacksites.html'">BLACK SITES</li>
+        <li onclick="showLogin()">AGENT LOGIN</li>
+      </ul>
+      
+      <div class="threat-panel">
+        <h3>FACILITY STATUS</h3>
+        <p>Operational Sites: <strong class="green">11</strong></p>
+        <p>Compromised: <strong class="red">3</strong></p>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="hero">
+        <h1>BLACK SITE REGISTRY</h1>
+        <p class="subtitle">AUTHORIZED LOCATIONS • TOP SECRET</p>
+      </header>
+
+      <div class="site-grid">
+        <div class="card">
+          <h3>BLACK SITE ALPHA - NEVADA</h3>
+          <p><strong>Status:</strong> <span class="green">FULLY OPERATIONAL</span></p>
+          <p>Primary Containment & Research</p>
+        </div>
+
+        <div class="card">
+          <h3>BLACK SITE ECHO - ALASKA</h3>
+          <p><strong>Status:</strong> <span class="red">OFFLINE</span></p>
+          <p>Communication Lost • Investigation Ongoing</p>
+        </div>
+
+        <div class="card">
+          <h3>BLACK SITE DELTA - OREGON</h3>
+          <p><strong>Status:</strong> <span class="yellow">RESTRICTED ACCESS</span></p>
+          <p>Active Cryptid Study</p>
+        </div>
+
+        <div class="card">
+          <h3>SITE OMEGA - [REDACTED]</h3>
+          <p><strong>Status:</strong> <span class="green">CLASSIFIED</span></p>
+          <p>High-Value Entity Storage</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Login Modal -->
+  <div id="login-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>AGENT AUTHENTICATION</h2>
+      <input type="text" id="agent-id" placeholder="AGENT ID" value="AGENT-7742">
+      <input type="password" id="password" placeholder="CLEARANCE CODE" value="CRYPTID47">
+      <button onclick="attemptLogin()">VERIFY CLEARANCE</button>
+      <p id="login-status" class="red"></p>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
