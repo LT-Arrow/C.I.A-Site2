@@ -3,12 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>C.I.A. DATABASE</title>
+  <title>DATABASE - C.I.A.</title>
   <link rel="stylesheet" href="assets/css/style.css">
-  <style>
-    .search-bar { width: 100%; padding: 15px; background: #0a0a0a; border: 1px solid #4cff7a; margin-bottom: 30px; font-size: 1.1rem; }
-    .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
-  </style>
 </head>
 <body>
   <div class="security-bar">
@@ -20,38 +16,64 @@
     <nav class="sidebar">
       <div class="logo">
         <h1>C.I.A.</h1>
+        <p>CRYPTIC INTELLIGENCE AGENCY</p>
       </div>
       <ul>
         <li onclick="window.location.href='index.html'">← HOME</li>
         <li onclick="window.location.href='database.html'">DATABASE</li>
         <li onclick="window.location.href='incidents.html'">INCIDENTS</li>
         <li onclick="window.location.href='blacksites.html'">BLACK SITES</li>
+        <li onclick="showLogin()">AGENT LOGIN</li>
       </ul>
     </nav>
 
     <main class="main-content">
-      <h1>CLASSIFIED ARCHIVE</h1>
-      <input type="text" class="search-bar" placeholder="SEARCH ENTITIES, INCIDENTS, OR LOCATIONS..." onkeyup="if(event.key==='Enter') alert('Search functionality active in full version')">
+      <header class="hero">
+        <h1>CLASSIFIED ARCHIVE</h1>
+        <p class="subtitle">AUTHORIZED PERSONNEL ONLY</p>
+      </header>
+
+      <input type="text" class="search-bar" placeholder="SEARCH ENTITIES, INCIDENTS, OR LOCATIONS..." onkeyup="if(event.key === 'Enter') alert('Search active in full version')">
 
       <div class="category-grid">
-        <div class="card" onclick="window.location.href='cryptid-profiles/howler.html'">
+        <div class="card" onclick="openCategory('Cryptid Database')">
           <h3>CRYPTID DATABASE</h3>
           <p>47 documented entities</p>
         </div>
-        <div class="card">
+        <div class="card" onclick="openCategory('Biohazard Archive')">
           <h3>BIOHAZARD ARCHIVE</h3>
           <p>19 active strains</p>
         </div>
-        <div class="card">
+        <div class="card" onclick="openCategory('Incident Reports')">
           <h3>INCIDENT REPORTS</h3>
           <p>312 sealed files</p>
         </div>
-        <div class="card">
+        <div class="card" onclick="window.location.href='blacksites.html'">
           <h3>BLACK SITE REGISTRY</h3>
           <p>14 operational facilities</p>
         </div>
       </div>
     </main>
+  </div>
+
+  <!-- Category Modal -->
+  <div id="category-modal" class="modal hidden">
+    <div class="modal-content" style="width: 520px;">
+      <h2 id="category-title"></h2>
+      <div id="category-body"></div>
+      <button onclick="closeCategoryModal()" style="margin-top:20px;">CLOSE ARCHIVE</button>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div id="login-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>AGENT AUTHENTICATION</h2>
+      <input type="text" id="agent-id" placeholder="AGENT ID" value="AGENT-7742">
+      <input type="password" id="password" placeholder="CLEARANCE CODE" value="CRYPTID47">
+      <button onclick="attemptLogin()">VERIFY CLEARANCE</button>
+      <p id="login-status"></p>
+    </div>
   </div>
 
   <script src="assets/js/main.js"></script>
