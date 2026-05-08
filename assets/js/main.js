@@ -22,7 +22,7 @@ const alerts = [
 function addAlert() {
   const feed = document.getElementById('alert-feed');
   if (!feed) return;
- 
+  
   const alert = document.createElement('div');
   alert.className = 'alert-item';
   alert.style.color = '#ff4444';
@@ -30,36 +30,12 @@ function addAlert() {
   alert.style.padding = '8px';
   alert.style.borderLeft = '3px solid #8b0000';
   alert.innerHTML = `● ${alerts[Math.floor(Math.random() * alerts.length)]}`;
- 
+  
   feed.appendChild(alert);
- 
+  
   if (feed.children.length > 5) {
     feed.removeChild(feed.children[0]);
   }
-}
-
-// Fake Recent Case Files
-function loadRecentFiles() {
-  const container = document.getElementById('recent-cards');
-  if (!container) return;
-
-  const files = [
-    { title: "Entity-019 'Howler'", level: "HIGH", status: "CONTAINED" },
-    { title: "Incident 47-B 'Forest Silence'", level: "CRITICAL", status: "UNDER INVESTIGATION" },
-    { title: "Biohazard Strain Ω-9", level: "EXTREME", status: "CONTAINED" }
-  ];
-
-  files.forEach(file => {
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML = `
-      <h3>${file.title}</h3>
-      <p>Threat Level: <span class="red">${file.level}</span></p>
-      <p>Status: <span class="green">${file.status}</span></p>
-      <button onclick="viewFile('${file.title}')" style="margin-top:10px; padding:6px 12px;">VIEW FILE</button>
-    `;
-    container.appendChild(card);
-  });
 }
 
 // Login System
@@ -68,24 +44,27 @@ function showLogin() {
   if (modal) modal.classList.remove('hidden');
 }
 
-// Full Working Login Function
 function attemptLogin() {
   const modal = document.getElementById('login-modal');
   const status = document.getElementById('login-status');
   const verifyBtn = document.querySelector('#login-modal button');
 
-  if (!modal || !status || !verifyBtn) return;
+  if (!modal) {
+    alert("Modal not found!");
+    return;
+  }
 
-  // Disable button and show processing
   verifyBtn.disabled = true;
   verifyBtn.textContent = "VERIFYING CLEARANCE...";
 
-  // Show success
-  status.textContent = "CLEARANCE VERIFIED ✓";
-  status.style.color = "#4cff7a";
+  if (status) {
+    status.textContent = "CLEARANCE VERIFIED ✓";
+    status.style.color = "#4cff7a";
+  }
 
-  // Close modal after delay
+  // Force close the modal
   setTimeout(() => {
+    modal.style.display = "none";        // Direct method
     modal.classList.add('hidden');
     
     setTimeout(() => {
@@ -94,7 +73,7 @@ function attemptLogin() {
   }, 1100);
 }
 
-// Terminal Mode
+// Terminal & Other Functions
 function enterTerminal() {
   const commands = [
     "ACCESSING TERMINAL...",
@@ -102,10 +81,9 @@ function enterTerminal() {
     "Type 'help' for available commands.",
     "-------------------------------"
   ];
-  
   let output = commands.join('\n');
   const terminal = prompt(output + "\n\n> ", "");
- 
+  
   if (terminal) {
     if (terminal.toLowerCase() === "help") {
       alert("Available: /files, /entities, /breaches, /status");
@@ -121,21 +99,10 @@ function viewFile(name) {
   alert(`Opening classified file: ${name}\n\n(This would open a full profile in the complete version)`);
 }
 
-// Initialize everything
+// Initialize
 window.onload = function() {
   updateClock();
- 
-  // Add random alerts
   setInterval(addAlert, 4500);
   for (let i = 0; i < 3; i++) addAlert();
-  
-  loadRecentFiles();
 };
-
-// Navigation helper
-function navigateTo(page) {
-  if (page === 'home') {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-}
 </script>
