@@ -4,12 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>C.I.A. | RESTRICTED ACCESS</title>
-  
-  <!-- Correct CSS Path -->
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <!-- Security Bar -->
+  <!-- Top Security Bar -->
   <div class="security-bar">
     <span>CRYPTIC INTELLIGENCE AGENCY • LEVEL 5 CLEARANCE REQUIRED</span>
     <span id="live-time"></span>
@@ -29,6 +27,13 @@
         <li onclick="window.location.href='blacksites.html'">BLACK SITES</li>
         <li onclick="showLogin()">AGENT LOGIN</li>
       </ul>
+      
+      <div class="threat-panel">
+        <h3>THREAT LEVEL</h3>
+        <div class="threat-level orange">ELEVATED</div>
+        <p>Active Cryptids: <strong>47</strong></p>
+        <p>Containment Breaches: <strong class="red">3</strong></p>
+      </div>
     </nav>
 
     <!-- Main Content -->
@@ -37,9 +42,27 @@
         <div class="classified-stamp">CLASSIFIED • RESTRICTED</div>
         <h1>CRYPTIC INTELLIGENCE AGENCY</h1>
         <p class="subtitle">Federal Restricted Database • Unauthorized Access Punishable by Law</p>
+        <div class="scan-line"></div>
       </header>
 
-      <h2 style="color:#4cff7a; text-align:center;">SITE LOADED SUCCESSFULLY</h2>
+      <section class="alerts">
+        <h2>LIVE CONTAINMENT ALERTS</h2>
+        <div id="alert-feed" class="alert-feed"></div>
+      </section>
+
+      <section class="incidents">
+        <h2>ACTIVE INCIDENTS</h2>
+        <div class="cards">
+          <div class="card red">
+            <h3>Nevada Desert Sector-7</h3>
+            <p>Level III Cryptid Activity • Type UNKNOWN</p>
+          </div>
+          <div class="card orange">
+            <h3>Oregon Forest - Sector 12</h3>
+            <p>Missing Persons Spike • Suspected Howler Activity</p>
+          </div>
+        </div>
+      </section>
     </main>
   </div>
 
@@ -54,7 +77,6 @@
     </div>
   </div>
 
-  <!-- JS Path -->
   <script src="assets/js/main.js"></script>
 </body>
 </html>
