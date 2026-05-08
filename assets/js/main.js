@@ -71,7 +71,6 @@ function attemptLogin() {
 }
 
 // ==================== INTERACTIVE INCIDENTS ====================
-
 const incidentsData = [
   {
     title: "NEVADA DESERT - SECTOR 7",
@@ -101,7 +100,6 @@ function loadIncidents() {
   if (!container) return;
 
   container.innerHTML = '';
-
   incidentsData.forEach(inc => {
     const card = document.createElement('div');
     card.className = 'card red';
@@ -130,8 +128,38 @@ function closeIncidentModal() {
   document.getElementById('incident-modal').classList.add('hidden');
 }
 
-// ==================== INITIALIZATION ====================
+// ==================== DATABASE CATEGORIES ====================
+function openCategory(name) {
+  const title = document.getElementById('category-title');
+  const body = document.getElementById('category-body');
+  
+  title.textContent = name;
+  
+  if (name === "Cryptid Database") {
+    body.innerHTML = `
+      <p><strong>47 Documented Entities</strong></p>
+      <ul style="margin:15px 0; line-height:1.8;">
+        <li onclick="viewFile('Entity-019 Howler')">• Entity-019 "Howler" - HIGH THREAT</li>
+        <li onclick="viewFile('Entity-047 Shadow')">• Entity-047 "Shadow Lurker"</li>
+        <li onclick="viewFile('Entity-112 Leviathan')">• Entity-112 "Leviathan Variant"</li>
+      </ul>
+    `;
+  } else {
+    body.innerHTML = `<p>Accessing ${name} archive...<br><br>Full records coming soon.</p>`;
+  }
+  
+  document.getElementById('category-modal').classList.remove('hidden');
+}
 
+function closeCategoryModal() {
+  document.getElementById('category-modal').classList.add('hidden');
+}
+
+function viewFile(name) {
+  alert(`Opening classified file: ${name}\n\nThis would open a full dossier in the complete version.`);
+}
+
+// ==================== INITIALIZATION ====================
 window.onload = function() {
   updateClock();
   
