@@ -2,16 +2,18 @@
 // Live Clock
 function updateClock() {
   const timeEl = document.getElementById('live-time');
-  setInterval(() => {
-    const now = new Date();
-    timeEl.textContent = now.toLocaleTimeString('en-US', { hour12: false }) + " UTC";
-  }, 1000);
+  if (timeEl) {
+    setInterval(() => {
+      const now = new Date();
+      timeEl.textContent = now.toLocaleTimeString('en-US', { hour12: false }) + " UTC";
+    }, 1000);
+  }
 }
 
 // Live Alert System
 const alerts = [
   "WARNING: Containment breach detected in Sector-7 (Nevada)",
-  "CRYTID SIGHTING: Type-Omega reported in Oregon Forest",
+  "CRYPTID SIGHTING: Type-Omega reported in Oregon Forest",
   "MEMORY SUPPRESSION PROTOCOL activated on 14 civilians",
   "Black Site Echo - Communication still offline",
   "UNKNOWN BIOLOGICAL ENTITY approaching Black Site Delta"
@@ -20,7 +22,7 @@ const alerts = [
 function addAlert() {
   const feed = document.getElementById('alert-feed');
   if (!feed) return;
-  
+ 
   const alert = document.createElement('div');
   alert.className = 'alert-item';
   alert.style.color = '#ff4444';
@@ -28,9 +30,9 @@ function addAlert() {
   alert.style.padding = '8px';
   alert.style.borderLeft = '3px solid #8b0000';
   alert.innerHTML = `● ${alerts[Math.floor(Math.random() * alerts.length)]}`;
-  
+ 
   feed.appendChild(alert);
-  
+ 
   if (feed.children.length > 5) {
     feed.removeChild(feed.children[0]);
   }
@@ -62,7 +64,8 @@ function loadRecentFiles() {
 
 // Login System
 function showLogin() {
-  document.getElementById('login-modal').classList.remove('hidden');
+  const modal = document.getElementById('login-modal');
+  if (modal) modal.classList.remove('hidden');
 }
 
 // Full Working Login Function
@@ -71,13 +74,13 @@ function attemptLogin() {
   const status = document.getElementById('login-status');
   const verifyBtn = document.querySelector('#login-modal button');
 
-  if (!modal || !status) return;
+  if (!modal || !status || !verifyBtn) return;
 
-  // Disable button and show processing state
+  // Disable button and show processing
   verifyBtn.disabled = true;
   verifyBtn.textContent = "VERIFYING CLEARANCE...";
 
-  // Show success message
+  // Show success
   status.textContent = "CLEARANCE VERIFIED ✓";
   status.style.color = "#4cff7a";
 
@@ -85,17 +88,10 @@ function attemptLogin() {
   setTimeout(() => {
     modal.classList.add('hidden');
     
-    // Optional success popup
     setTimeout(() => {
       alert("✅ CLEARANCE APPROVED\nWelcome, Agent-7742.");
-    }, 400);
-  }, 1200);
-}
-  setTimeout(() => {
-    alert("Welcome, Agent. Access to classified sections granted.");
-    document.getElementById('login-modal').classList.add('hidden');
-    // In a real expansion you could unlock more pages here
-  }, 1200);
+    }, 300);
+  }, 1100);
 }
 
 // Terminal Mode
@@ -106,15 +102,14 @@ function enterTerminal() {
     "Type 'help' for available commands.",
     "-------------------------------"
   ];
-
+  
   let output = commands.join('\n');
   const terminal = prompt(output + "\n\n> ", "");
-  
+ 
   if (terminal) {
     if (terminal.toLowerCase() === "help") {
       alert("Available: /files, /entities, /breaches, /status");
     } else if (terminal.toLowerCase().includes("files")) {
-      alert("Redirecting to Database... (In full version this opens database.html)");
       window.location.href = "database.html";
     } else {
       alert("Command received. Access logged.");
@@ -129,11 +124,11 @@ function viewFile(name) {
 // Initialize everything
 window.onload = function() {
   updateClock();
-  
+ 
   // Add random alerts
   setInterval(addAlert, 4500);
   for (let i = 0; i < 3; i++) addAlert();
-
+  
   loadRecentFiles();
 };
 
