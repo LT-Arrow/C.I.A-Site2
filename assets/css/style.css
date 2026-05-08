@@ -163,3 +163,27 @@ input {
 .red { color: #ff4444; }
 .orange { color: #ff8800; }
 .yellow { color: #ffcc00; }
+
+/* ==================== MODAL FIX ==================== */
+.modal.hidden {
+  display: none !important;
+}
+
+.modal-content {
+  box-shadow: 0 0 30px rgba(76, 255, 122, 0.3);
+}
+
+/* Extra safety for inputs and button */
+.modal-content button {
+  margin-top: 15px;
+  padding: 12px 24px;
+  background: #004d00;
+  color: #4cff7a;
+  border: 1px solid #4cff7a;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.modal-content button:hover {
+  background: #006600;
+}
