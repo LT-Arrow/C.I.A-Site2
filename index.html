@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C.I.A. | RESTRICTED ACCESS</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <!-- Top Security Bar -->
+  <div class="security-bar">
+    <span>CRYPTIC INTELLIGENCE AGENCY • LEVEL 5 CLEARANCE REQUIRED</span>
+    <span id="live-time"></span>
+  </div>
+
+  <div class="container">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="logo">
+        <h1>C.I.A.</h1>
+        <p>CRYPTIC INTELLIGENCE AGENCY</p>
+      </div>
+      <ul>
+        <li onclick="navigateTo('home')">HOME</li>
+        <li onclick="window.location.href='database.html'">DATABASE</li>
+        <li onclick="window.location.href='incidents.html'">INCIDENTS</li>
+        <li onclick="window.location.href='blacksites.html'">BLACK SITES</li>
+        <li onclick="showLogin()">AGENT LOGIN</li>
+      </ul>
+      
+      <div class="threat-panel">
+        <h3>THREAT LEVEL</h3>
+        <div class="threat-level orange">ELEVATED</div>
+        <p>Active Cryptids: <strong>47</strong></p>
+        <p>Containment Breaches: <strong class="red">3</strong></p>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="hero">
+        <div class="classified-stamp">CLASSIFIED • RESTRICTED</div>
+        <h1>CRYPTIC INTELLIGENCE AGENCY</h1>
+        <p class="subtitle">Federal Restricted Database • Unauthorized Access Punishable by Law</p>
+        <div class="scan-line"></div>
+      </header>
+
+      <section class="alerts">
+        <h2>LIVE CONTAINMENT ALERTS</h2>
+        <div id="alert-feed" class="alert-feed"></div>
+      </section>
+
+      <section class="incidents">
+        <h2>ACTIVE INCIDENTS</h2>
+        <div class="cards">
+          <div class="card red">
+            <h3>Nevada Desert Sector-7</h3>
+            <p>Level III Cryptid Activity • Type UNKNOWN</p>
+          </div>
+          <div class="card orange">
+            <h3>Oregon Forest - Sector 12</h3>
+            <p>Missing Persons Spike • Suspected [REDACTED]</p>
+          </div>
+          <div class="card yellow">
+            <h3>Black Site Echo</h3>
+            <p>Communication Lost • Possible Breach</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="recent-files">
+        <h2>RECENT CASE FILES</h2>
+        <div class="cards" id="recent-cards"></div>
+      </section>
+    </main>
+
+    <!-- Right Panel -->
+    <aside class="right-panel">
+      <h3>AGENCY STATUS</h3>
+      <p>Online Agents: <span class="green">19</span></p>
+      <p>Containment Integrity: <span class="yellow">87%</span></p>
+      
+      <button onclick="enterTerminal()" class="terminal-btn">ENTER TERMINAL MODE</button>
+    </aside>
+  </div>
+
+  <!-- Login Modal -->
+  <div id="login-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>AGENT AUTHENTICATION</h2>
+      <input type="text" id="agent-id" placeholder="AGENT ID" value="AGENT-7742">
+      <input type="password" id="password" placeholder="CLEARANCE CODE" value="CRYPTID47">
+      <button onclick="attemptLogin()">VERIFY CLEARANCE</button>
+      <p id="login-status" class="red"></p>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
