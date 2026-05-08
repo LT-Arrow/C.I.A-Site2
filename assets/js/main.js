@@ -1,4 +1,5 @@
-<script>
+// ==================== CORE FUNCTIONS ====================
+
 // Live Clock
 function updateClock() {
   const timeEl = document.getElementById('live-time');
@@ -49,10 +50,7 @@ function attemptLogin() {
   const status = document.getElementById('login-status');
   const verifyBtn = document.querySelector('#login-modal button');
 
-  if (!modal) {
-    alert("Modal not found!");
-    return;
-  }
+  if (!modal) return;
 
   verifyBtn.disabled = true;
   verifyBtn.textContent = "VERIFYING CLEARANCE...";
@@ -62,10 +60,9 @@ function attemptLogin() {
     status.style.color = "#4cff7a";
   }
 
-  // Force close the modal
   setTimeout(() => {
-    modal.style.display = "none";        // Direct method
     modal.classList.add('hidden');
+    modal.style.display = "none";
     
     setTimeout(() => {
       alert("✅ CLEARANCE APPROVED\nWelcome, Agent-7742.");
@@ -73,41 +70,8 @@ function attemptLogin() {
   }, 1100);
 }
 
-// Terminal & Other Functions
-function enterTerminal() {
-  const commands = [
-    "ACCESSING TERMINAL...",
-    "Welcome to C.I.A. Secure Terminal v0.8.4",
-    "Type 'help' for available commands.",
-    "-------------------------------"
-  ];
-  let output = commands.join('\n');
-  const terminal = prompt(output + "\n\n> ", "");
-  
-  if (terminal) {
-    if (terminal.toLowerCase() === "help") {
-      alert("Available: /files, /entities, /breaches, /status");
-    } else if (terminal.toLowerCase().includes("files")) {
-      window.location.href = "database.html";
-    } else {
-      alert("Command received. Access logged.");
-    }
-  }
-}
+// ==================== INTERACTIVE INCIDENTS ====================
 
-function viewFile(name) {
-  alert(`Opening classified file: ${name}\n\n(This would open a full profile in the complete version)`);
-}
-
-// Initialize
-window.onload = function() {
-  updateClock();
-  setInterval(addAlert, 4500);
-  for (let i = 0; i < 3; i++) addAlert();
-};
-</script>
-
-// Interactive Incident System
 const incidentsData = [
   {
     title: "NEVADA DESERT - SECTOR 7",
@@ -146,7 +110,7 @@ function loadIncidents() {
       <p><strong>Status:</strong> <span class="red">${inc.status}</span></p>
       <p><strong>Threat:</strong> ${inc.threat}</p>
       <p><strong>Last Update:</strong> ${inc.update}</p>
-      <button onclick="showIncident('${inc.title}', '${inc.details}')">VIEW FULL REPORT</button>
+      <button onclick="showIncident('${inc.title}', '${inc.details.replace(/'/g, "\\'")}')">VIEW FULL REPORT</button>
     `;
     container.appendChild(card);
   });
@@ -166,12 +130,17 @@ function closeIncidentModal() {
   document.getElementById('incident-modal').classList.add('hidden');
 }
 
-// Make sure this runs on incidents page
-if (document.getElementById('incident-cards')) {
-  window.onload = function() {
-    updateClock();
-    setInterval(addAlert, 4500);
-    for (let i = 0; i < 3; i++) addAlert();
+// ==================== INITIALIZATION ====================
+
+window.onload = function() {
+  updateClock();
+  
+  // Run alerts if alert feed exists
+  setInterval(addAlert, 4500);
+  for (let i = 0; i < 3; i++) addAlert();
+
+  // Run incidents if on incidents page
+  if (document.getElementById('incident-cards')) {
     loadIncidents();
-  };
-}
+  }
+};
