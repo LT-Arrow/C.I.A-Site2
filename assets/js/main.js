@@ -65,11 +65,32 @@ function showLogin() {
   document.getElementById('login-modal').classList.remove('hidden');
 }
 
+// Full Working Login Function
 function attemptLogin() {
+  const modal = document.getElementById('login-modal');
   const status = document.getElementById('login-status');
+  const verifyBtn = document.querySelector('#login-modal button');
+
+  if (!modal || !status) return;
+
+  // Disable button and show processing state
+  verifyBtn.disabled = true;
+  verifyBtn.textContent = "VERIFYING CLEARANCE...";
+
+  // Show success message
   status.textContent = "CLEARANCE VERIFIED ✓";
   status.style.color = "#4cff7a";
 
+  // Close modal after delay
+  setTimeout(() => {
+    modal.classList.add('hidden');
+    
+    // Optional success popup
+    setTimeout(() => {
+      alert("✅ CLEARANCE APPROVED\nWelcome, Agent-7742.");
+    }, 400);
+  }, 1200);
+}
   setTimeout(() => {
     alert("Welcome, Agent. Access to classified sections granted.");
     document.getElementById('login-modal').classList.add('hidden');
