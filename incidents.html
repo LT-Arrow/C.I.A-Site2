@@ -5,23 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ACTIVE INCIDENTS - C.I.A.</title>
   <link rel="stylesheet" href="assets/css/style.css">
-  <style>
-    .incident-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 20px;
-    }
-  </style>
 </head>
 <body>
-  <!-- Security Bar -->
   <div class="security-bar">
     <span>CRYPTIC INTELLIGENCE AGENCY • ACTIVE INCIDENTS</span>
     <span id="live-time"></span>
   </div>
 
   <div class="container">
-    <!-- Sidebar -->
     <nav class="sidebar">
       <div class="logo">
         <h1>C.I.A.</h1>
@@ -34,62 +25,25 @@
         <li onclick="window.location.href='blacksites.html'">BLACK SITES</li>
         <li onclick="showLogin()">AGENT LOGIN</li>
       </ul>
-      
-      <div class="threat-panel">
-        <h3>THREAT LEVEL</h3>
-        <div class="threat-level orange">ELEVATED</div>
-        <p>Active Incidents: <strong>12</strong></p>
-        <p>Containment Breaches: <strong class="red">3</strong></p>
-      </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="main-content">
       <header class="hero">
         <h1>ACTIVE INCIDENTS</h1>
         <p class="subtitle">LIVE FIELD REPORTS • REAL-TIME MONITORING</p>
       </header>
 
-      <div class="incident-grid">
-        <div class="card red">
-          <h3>NEVADA DESERT - SECTOR 7</h3>
-          <p><strong>Status:</strong> ONGOING</p>
-          <p><strong>Threat:</strong> Level III Cryptid Activity</p>
-          <p><strong>Last Update:</strong> 47 minutes ago</p>
-          <button onclick="alert('Opening full incident report...')">VIEW FULL REPORT</button>
-        </div>
-
-        <div class="card orange">
-          <h3>OREGON FOREST - SECTOR 12</h3>
-          <p><strong>Status:</strong> HIGH ACTIVITY</p>
-          <p><strong>Threat:</strong> Missing Persons Spike (17 cases)</p>
-          <p><strong>Last Update:</strong> 2 hours ago</p>
-          <button onclick="alert('Opening full incident report...')">VIEW FULL REPORT</button>
-        </div>
-
-        <div class="card yellow">
-          <h3>BLACK SITE ECHO - ALASKA</h3>
-          <p><strong>Status:</strong> COMMUNICATION LOST</p>
-          <p><strong>Threat:</strong> Possible Containment Failure</p>
-          <p><strong>Last Update:</strong> 11 hours ago</p>
-          <button onclick="alert('Opening full incident report...')">VIEW FULL REPORT</button>
-        </div>
-
-        <div class="card red">
-          <h3>APPALACHIAN MOUNTAINS</h3>
-          <p><strong>Status:</strong> CONTAINMENT TEAMS DEPLOYED</p>
-          <p><strong>Threat:</strong> Unknown Howler Variant</p>
-          <p><strong>Last Update:</strong> 5 hours ago</p>
-          <button onclick="alert('Opening full incident report...')">VIEW FULL REPORT</button>
-        </div>
-      </div>
+      <div class="cards" id="incident-cards"></div>
     </main>
+  </div>
 
-    <!-- Right Panel -->
-    <aside class="right-panel">
-      <h3>LIVE ACTIVITY</h3>
-      <p id="alert-feed" style="background:#121212; padding:15px; min-height:300px;"></p>
-    </aside>
+  <!-- Detailed Incident Modal -->
+  <div id="incident-modal" class="modal hidden">
+    <div class="modal-content" style="width: 560px; max-height: 80vh; overflow-y: auto;">
+      <h2 id="modal-title" style="color:#ff4444;"></h2>
+      <div id="modal-body"></div>
+      <button onclick="closeIncidentModal()" style="margin-top:20px;">CLOSE FILE</button>
+    </div>
   </div>
 
   <!-- Login Modal -->
@@ -99,7 +53,7 @@
       <input type="text" id="agent-id" placeholder="AGENT ID" value="AGENT-7742">
       <input type="password" id="password" placeholder="CLEARANCE CODE" value="CRYPTID47">
       <button onclick="attemptLogin()">VERIFY CLEARANCE</button>
-      <p id="login-status" class="red"></p>
+      <p id="login-status"></p>
     </div>
   </div>
 
