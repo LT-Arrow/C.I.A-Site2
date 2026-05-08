@@ -4,17 +4,57 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>C.I.A. | RESTRICTED ACCESS</title>
+  
+  <!-- Correct CSS Path -->
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+  <!-- Security Bar -->
   <div class="security-bar">
     <span>CRYPTIC INTELLIGENCE AGENCY • LEVEL 5 CLEARANCE REQUIRED</span>
     <span id="live-time"></span>
   </div>
 
-  <h1 style="color:#4cff7a; text-align:center; margin-top:100px;">C.I.A. WEBSITE LOADING...</h1>
-  <p style="text-align:center; color:#d8d8d8;">If you see this, your CSS/JS paths may need checking.</p>
+  <div class="container">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="logo">
+        <h1>C.I.A.</h1>
+        <p>CRYPTIC INTELLIGENCE AGENCY</p>
+      </div>
+      <ul>
+        <li onclick="window.location.href='index.html'">HOME</li>
+        <li onclick="window.location.href='database.html'">DATABASE</li>
+        <li onclick="window.location.href='incidents.html'">INCIDENTS</li>
+        <li onclick="window.location.href='blacksites.html'">BLACK SITES</li>
+        <li onclick="showLogin()">AGENT LOGIN</li>
+      </ul>
+    </nav>
 
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="hero">
+        <div class="classified-stamp">CLASSIFIED • RESTRICTED</div>
+        <h1>CRYPTIC INTELLIGENCE AGENCY</h1>
+        <p class="subtitle">Federal Restricted Database • Unauthorized Access Punishable by Law</p>
+      </header>
+
+      <h2 style="color:#4cff7a; text-align:center;">SITE LOADED SUCCESSFULLY</h2>
+    </main>
+  </div>
+
+  <!-- Login Modal -->
+  <div id="login-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>AGENT AUTHENTICATION</h2>
+      <input type="text" id="agent-id" placeholder="AGENT ID" value="AGENT-7742">
+      <input type="password" id="password" placeholder="CLEARANCE CODE" value="CRYPTID47">
+      <button onclick="attemptLogin()">VERIFY CLEARANCE</button>
+      <p id="login-status"></p>
+    </div>
+  </div>
+
+  <!-- JS Path -->
   <script src="assets/js/main.js"></script>
 </body>
-</html>  
+</html>
