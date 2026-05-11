@@ -11,42 +11,78 @@ function updateClock() {
   }
 }
 
-// Live Alert System
-const alerts = [
-  "WARNING: Containment breach detected in Sector-7 (Nevada)",
-  "CRYPTID SIGHTING: Type-Omega reported in Oregon Forest",
-  "MEMORY SUPPRESSION PROTOCOL activated on 14 civilians",
-  "Black Site Echo - Communication still offline",
-  "UNKNOWN BIOLOGICAL ENTITY approaching Black Site Delta"
+// ==================== DYNAMIC LIVE ALERTS ====================
+const alertTemplates = [
+  "WARNING: Containment breach detected in Sector-{n} ({loc})",
+  "CRYPTID SIGHTING: Entity-{n} reported in {loc}",
+  "MEMORY SUPPRESSION PROTOCOL activated on {n} civilians in {loc}",
+  "Black Site {site} - Communication lost • Investigation ongoing",
+  "UNKNOWN BIOLOGICAL ENTITY approaching Black Site {site}",
+  "CONTAINMENT FAILURE at Sector-{n} • Multiple casualties reported",
+  "DIMENSIONAL ANOMALY detected in {loc} • Class-{level} threat",
+  "Howler activity confirmed in {loc} • Audio mimicry recorded",
+  "BIOHAZARD STRAIN Ω-{n} mutation detected",
+  "Cerberus Team {team} requesting immediate backup in {loc}",
+  "UNAUTHORIZED ACCESS detected at Black Site {site}",
+  "Entity-{n} has breached outer perimeter"
 ];
+
+const locations = ["Nevada Desert", "Oregon Forest", "Alaska", "Appalachian Mountains", "Amazon Basin", "Antarctica", "Siberia", "Pacific Sector", "Rocky Mountains"];
+const sites = ["Alpha", "Echo", "Delta", "Omega", "Gamma", "Theta", "Kappa"];
+const levels = ["II", "III", "IV", "V"];
+
+function getRandomAlert() {
+  let template = alertTemplates[Math.floor(Math.random() * alertTemplates.length)];
+  
+  template = template.replace("{n}", Math.floor(Math.random() * 99) + 10);
+  template = template.replace("{loc}", locations[Math.floor(Math.random() * locations.length)]);
+  template = template.replace("{site}", sites[Math.floor(Math.random() * sites.length)]);
+  template = template.replace("{level}", levels[Math.floor(Math.random() * levels.length)]);
+  template = template.replace("{team}", Math.floor(Math.random() * 12) + 1);
+  
+  return template;
+}
 
 function addAlert() {
   const feed = document.getElementById('alert-feed');
   if (!feed) return;
+
+  const alertText = getRandomAlert();
   
   const alert = document.createElement('div');
   alert.className = 'alert-item';
   alert.style.color = '#ff4444';
-  alert.style.marginBottom = '8px';
-  alert.style.padding = '8px';
-  alert.style.borderLeft = '3px solid #8b0000';
-  alert.innerHTML = `● ${alerts[Math.floor(Math.random() * alerts.length)]}`;
+  alert.style.marginBottom = '10px';
+  alert.style.padding = '10px 12px';
+  alert.style.borderLeft = '4px solid #8b0000';
+  alert.innerHTML = `● ${alertText}`;
   
   feed.appendChild(alert);
-  
-  if (feed.children.length > 5) {
+
+  if (feed.children.length > 7) {
     feed.removeChild(feed.children[0]);
   }
 }
 
-// Login System
+// ==================== LOGIN SYSTEM WITH REMEMBER USERNAME ====================
+
 function showLogin() {
   const modal = document.getElementById('login-modal');
-  if (modal) modal.classList.remove('hidden');
+  if (modal) {
+    modal.classList.remove('hidden');
+    
+    // Auto-fill saved Agent ID
+    const savedAgent = localStorage.getItem('cia_agent_id');
+    if (savedAgent) {
+      document.getElementById('agent-id').value = savedAgent;
+    }
+  }
 }
 
 function attemptLogin() {
   const modal = document.getElementById('login-modal');
+  const agentInput = document.getElementById('agent-id');
+  const agentId = agentInput.value.trim() || "AGENT-7742";
   const status = document.getElementById('login-status');
   const verifyBtn = document.querySelector('#login-modal button');
 
@@ -60,14 +96,40 @@ function attemptLogin() {
     status.style.color = "#4cff7a";
   }
 
+  // Save username
+  localStorage.setItem('cia_agent_id', agentId);
+
   setTimeout(() => {
     modal.classList.add('hidden');
     modal.style.display = "none";
     
     setTimeout(() => {
-      alert("✅ CLEARANCE APPROVED\nWelcome, Agent-7742.");
+      alert(`✅ CLEARANCE APPROVED\nWelcome back, ${agentId}.`);
+      updateLoggedInState();
     }, 300);
   }, 1100);
+}
+
+function updateLoggedInState() {
+  const savedAgent = localStorage.getItem('cia_agent_id');
+  if (savedAgent) {
+    const securityBar = document.querySelector('.security-bar');
+    if (securityBar) {
+      securityBar.innerHTML = `
+        <span>CRYPTIC INTELLIGENCE AGENCY • LEVEL 5 CLEARANCE</span>
+        <span style="color:#4cff7a; margin-left:10px; font-weight:bold;">AGENT: ${savedAgent}</span>
+        <span id="live-time"></span>
+        <button class="hamburger" onclick="toggleSidebar()">☰</button>
+      `;
+    }
+  }
+}
+
+function logout() {
+  if (confirm("Log out and clear saved Agent ID?")) {
+    localStorage.removeItem('cia_agent_id');
+    location.reload();
+  }
 }
 
 // ==================== INTERACTIVE INCIDENTS ====================
@@ -98,7 +160,6 @@ const incidentsData = [
 function loadIncidents() {
   const container = document.getElementById('incident-cards');
   if (!container) return;
-
   container.innerHTML = '';
   incidentsData.forEach(inc => {
     const card = document.createElement('div');
@@ -132,9 +193,9 @@ function closeIncidentModal() {
 function openCategory(name) {
   const title = document.getElementById('category-title');
   const body = document.getElementById('category-body');
-  
+ 
   title.textContent = name;
-  
+ 
   if (name === "Cryptid Database") {
     body.innerHTML = `
       <p><strong>47 Documented Entities</strong></p>
@@ -147,7 +208,7 @@ function openCategory(name) {
   } else {
     body.innerHTML = `<p>Accessing ${name} archive...<br><br>Full records coming soon.</p>`;
   }
-  
+ 
   document.getElementById('category-modal').classList.remove('hidden');
 }
 
@@ -163,11 +224,16 @@ function viewFile(name) {
 window.onload = function() {
   updateClock();
   
-  // Run alerts if alert feed exists
-  setInterval(addAlert, 4500);
-  for (let i = 0; i < 3; i++) addAlert();
+  // Check for saved username
+  updateLoggedInState();
 
-  // Run incidents if on incidents page
+  // Dynamic alerts
+  setInterval(addAlert, 3500);
+  for (let i = 0; i < 5; i++) {
+    setTimeout(addAlert, i * 600);
+  }
+
+  // Load incidents if on that page
   if (document.getElementById('incident-cards')) {
     loadIncidents();
   }
