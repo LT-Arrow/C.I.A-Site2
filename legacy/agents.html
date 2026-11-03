@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AGENTS - C.I.A.</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="security-bar">
+    <span>CRYPTIC INTELLIGENCE AGENCY • PERSONNEL DOSSIERS</span>
+    <span id="live-time"></span>
+  </div>
+
+  <div class="container">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="logo">
+        <h1>C.I.A.</h1>
+        <p>CRYPTIC INTELLIGENCE AGENCY</p>
+      </div>
+      <ul>
+        <li onclick="window.location.href='index.html'">← HOME</li>
+        <li onclick="window.location.href='database.html'">DATABASE</li>
+        <li onclick="window.location.href='incidents.html'">INCIDENTS</li>
+        <li onclick="window.location.href='blacksites.html'">BLACK SITES</li>
+        <li onclick="window.location.href='lore.html'">LORE</li>
+        <li onclick="window.location.href='agents.html'" class="active">AGENTS</li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="hero">
+        <div class="classified-stamp">CLASSIFIED • PERSONNEL ONLY</div>
+        <h1>ACTIVE & FOUNDING AGENTS</h1>
+        <p class="subtitle">Level 5 Clearance Required</p>
+      </header>
+
+      <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+
+        <!-- Fred Stillax - Main Feature -->
+        <div class="card red" onclick="alert('Opening Full Dossier: AGENT-0017 Stillax...')">
+          <h3>AGENT-0017 "STILLAX"</h3>
+          <p><strong>Founding Member</strong></p>
+          <p>WWII Veteran • Cerberus Division</p>
+          <p><strong>Status:</strong> <span class="red">ACTIVE / PRESUMED KIA 1989</span></p>
+          <p style="margin-top:10px; font-size:0.9rem;">One of the first 12 agents. Survived the Ardennes Skinwalker Incident in 1944.</p>
+        </div>
+
+        <!-- Placeholder Agents -->
+        <div class="card">
+          <h3>AGENT MARA VOSS</h3>
+          <p><strong>Archivist Division</strong></p>
+          <p>Current • Level 4 Clearance</p>
+          <p>Specialist in Cryptid Research & Historical Anomalies</p>
+        </div>
+
+        <div class="card">
+          <h3>AGENT LEON REYES</h3>
+          <p><strong>Cerberus Containment Unit</strong></p>
+          <p>Current • Level 3 Clearance</p>
+          <p>Former Marine • Field Operative</p>
+        </div>
+
+        <div class="card">
+          <h3>DR. ELIAS CROWE</h3>
+          <p><strong>Research Division</strong></p>
+          <p>Current • Level 4 Clearance</p>
+          <p>Lead Scientist • Black Site Omega</p>
+        </div>
+
+      </div>
+
+      <p style="margin-top:40px; color:#888; text-align:center;">
+        More agent dossiers will be declassified as clearance levels increase.
+      </p>
+    </main>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

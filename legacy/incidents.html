@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACTIVE INCIDENTS - C.I.A.</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="security-bar">
+    <span>CRYPTIC INTELLIGENCE AGENCY • ACTIVE INCIDENTS</span>
+    <span id="live-time"></span>
+  </div>
+
+  <div class="container">
+    <nav class="sidebar">
+      <div class="logo">
+        <h1>C.I.A.</h1>
+        <p>CRYPTIC INTELLIGENCE AGENCY</p>
+      </div>
+      <ul>
+        <li onclick="window.location.href='index.html'">← HOME</li>
+        <li onclick="window.location.href='database.html'">DATABASE</li>
+        <li onclick="window.location.href='incidents.html'">INCIDENTS</li>
+        <li onclick="window.location.href='blacksites.html'">BLACK SITES</li>
+        <li onclick="showLogin()">AGENT LOGIN</li>
+      </ul>
+    </nav>
+
+    <main class="main-content">
+      <header class="hero">
+        <h1>ACTIVE INCIDENTS</h1>
+        <p class="subtitle">LIVE FIELD REPORTS • REAL-TIME MONITORING</p>
+      </header>
+
+      <div class="cards" id="incident-cards"></div>
+    </main>
+  </div>
+
+  <!-- Detailed Incident Modal -->
+  <div id="incident-modal" class="modal hidden">
+    <div class="modal-content" style="width: 560px; max-height: 80vh; overflow-y: auto;">
+      <h2 id="modal-title" style="color:#ff4444;"></h2>
+      <div id="modal-body"></div>
+      <button onclick="closeIncidentModal()" style="margin-top:20px;">CLOSE FILE</button>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div id="login-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>AGENT AUTHENTICATION</h2>
+      <input type="text" id="agent-id" placeholder="AGENT ID" value="AGENT-7742">
+      <input type="password" id="password" placeholder="CLEARANCE CODE" value="CRYPTID47">
+      <button onclick="attemptLogin()">VERIFY CLEARANCE</button>
+      <p id="login-status"></p>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
