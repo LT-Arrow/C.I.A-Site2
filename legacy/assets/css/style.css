@@ -1,0 +1,157 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0a0a0a;
+  color: #d8d8d8;
+  font-family: 'Courier New', monospace;
+  line-height: 1.5;
+}
+
+/* Top Security Bar */
+.security-bar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #8b0000;
+  color: white;
+  padding: 8px 10px;
+  font-size: 0.8rem;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+/* Main Container */
+.container {
+  display: flex;
+  min-height: 100vh;
+  padding-top: 55px;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background: #121212;
+  padding: 20px;
+  border-right: 1px solid #1f4f7a;
+  flex-shrink: 0;
+}
+
+.logo h1 {
+  color: #4cff7a;
+  font-size: 1.9rem;
+}
+
+.sidebar ul {
+  list-style: none;
+  margin-top: 25px;
+}
+
+.sidebar li {
+  padding: 12px 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.sidebar li:hover {
+  background: #1f4f7a;
+  color: #4cff7a;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+/* Cards */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.card {
+  background: #1a1a1a;
+  padding: 16px;
+  border-left: 5px solid #4cff7a;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+/* Modals */
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 15px;
+}
+
+.modal.hidden {
+  display: none !important;
+}
+
+.modal-content {
+  background: #121212;
+  padding: 25px;
+  border: 2px solid #1f4f7a;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+/* Responsive - Mobile First */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #1f4f7a;
+    padding: 15px;
+  }
+  
+  .main-content {
+    padding: 15px;
+  }
+  
+  .hero h1 {
+    font-size: 1.7rem;
+  }
+  
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .security-bar {
+    font-size: 0.75rem;
+    padding: 6px 8px;
+  }
+  
+  .sidebar li {
+    padding: 10px;
+  }
+}
+
+/* Colors */
+.green { color: #4cff7a; }
+.red { color: #ff4444; }
+.orange { color: #ff8800; }
